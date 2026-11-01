@@ -1,0 +1,34 @@
+{
+  "name": "backend-crud-api",
+  "version": "1.0.0",
+  "description": "Beginner Node.js, Express and MongoDB backend with authentication examples and Posts CRUD APIs",
+  "main": "backend/src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/src/index.js",
+    "dev": "node --watch backend/src/index.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "mongoose",
+    "crud",
+    "rest-api"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.3"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^10.3.0",
+    "supertest": "^7.1.4"
+  }
+}

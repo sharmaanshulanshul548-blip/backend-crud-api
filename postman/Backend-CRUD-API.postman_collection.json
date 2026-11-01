@@ -1,0 +1,91 @@
+{
+  "info": {
+    "_postman_id": "df33de40-2a7e-45ca-baf4-0da6397f2bbb",
+    "name": "Backend CRUD API",
+    "description": "Requests for demonstrating user endpoints and Posts CRUD operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4000" },
+    { "key": "postId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/health" }
+    },
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"student1\",\n  \"email\": \"student1@example.com\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/users/register"
+      }
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"student1@example.com\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/users/login"
+      }
+    },
+    {
+      "name": "Create Post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const data = pm.response.json();",
+              "if (data.post && data.post._id) pm.collectionVariables.set('postId', data.post._id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Anshu\",\n  \"description\": \"My first backend post\",\n  \"age\": 20\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/posts/create"
+      }
+    },
+    {
+      "name": "Get All Posts",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/posts/getPosts" }
+    },
+    {
+      "name": "Get One Post",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/posts/{{postId}}" }
+    },
+    {
+      "name": "Update Post",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"description\": \"Updated using Postman\"\n}" },
+        "url": "{{baseUrl}}/api/v1/posts/update/{{postId}}"
+      }
+    },
+    {
+      "name": "Delete Post",
+      "request": { "method": "DELETE", "url": "{{baseUrl}}/api/v1/posts/delete/{{postId}}" }
+    },
+    {
+      "name": "Logout User",
+      "request": { "method": "POST", "url": "{{baseUrl}}/api/v1/users/logout" }
+    }
+  ]
+}
